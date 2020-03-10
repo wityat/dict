@@ -1,6 +1,7 @@
 #include <stdio.h>
+#include "dict.h"
 
 int main() {
-    printf("Hello, World!\n");
+    printf("Введите ");
     return 0;
 }

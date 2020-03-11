@@ -91,12 +91,12 @@ void print_value(Value* value){
 
 Value* pars_input_value(char* value) {
     char *p = NULL;
-    long int_value = strtol(value, &p, 10);
+    int int_value = (int) strtol(value, &p, 10);
     if (!*p) {
         val.type = INT;
         val.int_value = int_value;
     } else {
-        double float_value = strtof(value, &p);
+        float float_value = strtof(value, &p);
         if (!*p) {
             val.type = FLOAT;
             val.float_value = float_value;

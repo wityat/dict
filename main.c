@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include "stdlib.h"
 #include "dict.h"
 #include "string.h"
 
@@ -10,8 +11,7 @@ int main() {
     printf("You are WELCOME into NEW AWESOME PROGRAM, which simulate dictionary!\n "
            "Please, enter 'help', if you don't know how to use this.\n\n");
 
-    for(char* c = ""; strcmp("quit", c) != 0; scanf("%s", c)){
-
+    for (char *c = calloc(sizeof(char*), 100); strcmp("quit", c) != 0; scanf("%s", c)) {
         if (strcmp("help", c) == 0) {
             printf("THIS IS HELP!\n\n"
                    "get - to go into 'get value from key' mode\n"
@@ -35,16 +35,17 @@ int main() {
             printf("Uhhu!\n"
                    "Now you are in PUT MODE\n"
                    "Enter a KEY, when you wanna insert value!");
-            char *key = NULL;
+            char *key = calloc(sizeof(char*), 100);
             scanf("%s", key);
             printf("Enter a VALUE, for current key!");
             scanf("%s", c);
             Value* value = pars_input_value(c);
             put(&dict, key, *value);
+            free(key);
         }else if(strcmp("pop", c) == 0){
             printf("Uhhu!\n"
-                   "Now you are in PUT MODE\n"
-                   "Enter a KEY, when you wanna insert value!");
+                   "Now you are in POP MODE\n"
+                   "Enter a KEY, when you wanna delete value!");
             scanf("%s", c);
             pop(&dict, c);
         }else if(strcmp("show_dict", c) == 0){
@@ -55,6 +56,7 @@ int main() {
             printf("Please, if you don't know how to use this, enter 'help'!\n\n");
         }
     }
-    //free(dict);
+    free(&dict);
+
     return 0;
 }

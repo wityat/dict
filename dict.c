@@ -23,18 +23,23 @@ Value* get(Dict dict, const char* key){
     return &val;
 }
 
+void put_into_size_now(Dict dict, char* key, Value value){
+    dict.keys[dict.size_now] = key;
+    dict.values[dict.size_now] = value;
+}
+
 void put(Dict dict, char* key, Value value){
     if (dict.size_now < dict.size_max) {
         Value* value_ = get(dict, key);
         if (value_->type == ERROR) {
-            dict.keys[dict.size_now] = key;
-            dict.values[dict.size_now] = value;
+            put_into_size_now(dict, key, value);
             dict.size_now++;}
         else{
             value_ = &value;
         }
     } else if (dict.size_now == dict.size_max){
         add_memory(dict);
+        put_into_size_now(dict, key, value);
     } else{
         printf("ERROR!!!");
     }

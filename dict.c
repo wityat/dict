@@ -54,18 +54,18 @@ void put(Dict* dict, char* key, Value value){
 
 void print_dict(Dict* dict){
     for (int i = 0; i < dict->iterator; i++){
-        switch (dict->values[i]->type){
+        switch (dict->values[i].type){
             case STRING:
-                printf("%d. %s - %s", i, dict->keys[i], dict->values[i]->string_value);
+                printf("%d. %s - %s\n", i, dict->keys[i], dict->values[i].string_value);
                 break;
             case INT:
-                printf("%d. %s - %d", i, dict->keys[i], dict->values[i]->int_value);
+                printf("%d. %s - %d\n", i, dict->keys[i], dict->values[i].int_value);
                 break;
             case FLOAT:
-                printf("%d. %s - %f", i, dict->keys[i], dict->values[i]->float_value);
+                printf("%d. %s - %f\n", i, dict->keys[i], dict->values[i].float_value);
                 break;
             default:
-                printf("ERROR!!!");
+                printf("ERROR!!!\n");
                 break;
         }
 
@@ -75,18 +75,37 @@ void print_dict(Dict* dict){
 void print_value(Value* value){
     switch (value->type){
         case STRING:
-            printf("%s", value->string_value);
+            printf("%s\n", value->string_value);
             break;
         case INT:
-            printf("%d", value->int_value);
+            printf("%d\n", value->int_value);
             break;
         case FLOAT:
-            printf("%f", value->float_value);
+            printf("%f\n", value->float_value);
             break;
         default:
-            printf("ERROR!!!");
+            printf("ERROR!!!\n");
             break;
     }
+}
+
+Value* pars_input_value(char* value) {
+    char *p = NULL;
+    long int_value = strtol(value, &p, 10);
+    if (!*p) {
+        val.type = INT;
+        val.int_value = int_value;
+    } else {
+        double float_value = strtof(value, &p);
+        if (!*p) {
+            val.type = FLOAT;
+            val.float_value = float_value;
+        } else {
+            val.type = STRING;
+            val.string_value = value;
+        }
+    }
+    return &val;
 }
 
 void pop(Dict* dict, const char* key){

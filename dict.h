@@ -17,7 +17,7 @@ Value* get(Dict* dict, const char* key);
 void put(Dict* dict, char* key, Value value);
 void pop(Dict* dict, const char* key);
 void add_memory(Dict* dict);
-int pars_input_key(char* key, Value* value);
+Value* pars_input_value(char* value);
 void print_value(Value* value);
 void print_dict(Dict* dict);
 #endif //DICT_DICT_H

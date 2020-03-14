@@ -63,10 +63,5 @@ int main() {
     }
     free(dict.values);
     free(dict.keys);
-    free(&dict.size_max);
-    free(&dict.iterator);
-    free(&dict);
-
-
     return 0;
 }

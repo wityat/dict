@@ -53,6 +53,7 @@ void put(Dict* dict, char* key, Value value){
     } else if (dict->iterator == dict->size_max-1){
         add_memory(dict);
         put_into_size_now(dict, key, value);
+        dict->iterator += 1;
     } else{
         printf("ERROR!!!");
     }
